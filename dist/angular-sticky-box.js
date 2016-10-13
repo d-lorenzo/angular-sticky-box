@@ -60,8 +60,10 @@ angular.module('angular-sticky-box', []).directive('stickyBox', ['$timeout', fun
 						if (isNaN(bottom)) {
 							bottom = viewHeight - scope.innerHeight - scope.cfg.offset;
 						}
-						if (bottom < 0) {
-							el.children[0].style.bottom = (bottom + window.pageYOffset - scope.pageY) + 'px';
+
+						var calcBottom = (bottom + window.pageYOffset - scope.pageY);
+						if (calcBottom < 0) {
+							el.children[0].style.bottom = calcBottom + 'px';
 						} else {
 							el.children[0].style.bottom = '0px';
 						}

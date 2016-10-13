@@ -1,3 +1,11 @@
+/*!
+ * angular-sticky-box
+ * https://github.com/pcassis/angular-sticky-box
+ * Version: 0.0.1 - 2016-02-06T08:00:13.080Z
+ * License: MIT
+ */
+
+
 'use strict';
 
 angular.module('angular-sticky-box', []).directive('stickyBox', ['$timeout', function ($timeout) {
@@ -52,8 +60,10 @@ angular.module('angular-sticky-box', []).directive('stickyBox', ['$timeout', fun
 						if (isNaN(bottom)) {
 							bottom = viewHeight - scope.innerHeight - scope.cfg.offset;
 						}
-						if (bottom < 0) {
-							el.children[0].style.bottom = (bottom + window.pageYOffset - scope.pageY) + 'px';
+
+						var calcBottom = (bottom + window.pageYOffset - scope.pageY);
+						if (calcBottom < 0) {
+							el.children[0].style.bottom = calcBottom + 'px';
 						} else {
 							el.children[0].style.bottom = '0px';
 						}
@@ -155,7 +165,7 @@ angular.module('angular-sticky-box', []).directive('stickyBox', ['$timeout', fun
 				});
 			});
 			angular.element(window).on('scroll', function () {
-				$timeout(function() {
+				$timeout(function () {
 					setup(scope, el);
 				});
 			});
@@ -168,3 +178,4 @@ angular.module('angular-sticky-box', []).directive('stickyBox', ['$timeout', fun
 		}
 	};
 }]);
+angular.module("angular-sticky-box").run(["$templateCache", function ($templateCache) { $templateCache.put("angular-sticky-box.html", "<div class=\"angular-sticky-box\"><div>The value is {{getValue()}}</div><button ng-click=\"increment()\">+</button></div>"); }]);
